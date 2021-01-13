@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+  }
+  .nav{
+      padding: 5px;
+    background-color:rgb(255, 168, 8);
+    border-bottom: 1px solid lightgray;
+    object-fit: contain;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top:0;
+    z-index: 100;
+    float: none;
+  }
+
+.header{
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px;
+    font-style:italic;
+    min-height: 5vh;
+    margin-left: 5px;
+    text-align: center;
+    height: auto;
+    width: auto;
+    border-radius: 10px;
+    border: 2px solid orange;
+    background-color: rgb(255, 206, 114);
+}
+.login_signup_button{
+    display: flex;
+    flex-direction: flex;
+    border-radius: 10px;
+    height: auto;
+    width: auto;
+    justify-content: space-between;
+    border: 2px solid orange;
+    background-color:rgb(255, 206, 114);
+}
+.name{
+    font-family: monospace;
+    padding: 5px;
+}

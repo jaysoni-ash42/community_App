@@ -1,0 +1,72 @@
+.Post{
+    background-color: white;
+    border: 2px solid lightgray;
+    margin-bottom: 10px;
+    width:70vh;
+}
+.post_image{
+    width:70vh;
+    height:60vh;
+    object-fit:fill;
+    padding:5px;
+}
+.post_name{
+    margin-left: 10px;
+    padding: 5px;
+    font-weight: lighter;
+    display: flex;
+    margin-bottom: 10px;
+    border-top: 1px solid lightgray;
+    object-fit: contain;
+    border-bottom: 1px solid lightgray;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    border-radius: 10px;
+}
+.post_comments{
+    font-family:  Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: 10px;
+    margin-top: 5px;
+    font-size: small;
+    display: flex;
+    margin-bottom: 5px;
+}
+.post_header
+{
+    padding: 10px;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+.post_text{
+    margin-left: 10px;
+}
+.add_comment{
+    flex:0;
+    
+}
+.comment_input{
+    flex:1;
+    padding: 10px; 
+}
+.comment_box{
+    display: flex;
+    border-top: 1px solid lightgray;   
+}
+.comment{
+    display: flex;
+    flex-direction: column;
+}
+.comments{
+    object-fit: contain;
+}
+.Modal{
+    object-fit: contain;
+    background-color: #fafafa;
+    height: auto;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    padding: 5px;
+    transform: translate(-50%, -50%);
+  }

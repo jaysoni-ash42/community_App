@@ -1,0 +1,69 @@
+*{
+    margin:0;
+    object-fit: contain;
+}
+.user{
+    object-fit: contain;
+    background-color: white;
+}
+.user_header{
+    display :flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid lightgray;
+}
+.profile_image
+{
+    height: 20vh;
+    width: 20vh;
+    object-fit: contain;
+    margin: 10px;
+    border-radius: 500px;
+
+}
+.profile_name{
+    width: auto;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    border: 2px solid orange;
+    padding: 5px;
+    background-color:rgb(255, 206, 114);
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.posts_view{
+    margin-top: 10px;
+    object-fit: contain;
+    padding:5px;
+  }
+  .post{
+      max-width: auto;
+      border: 2px solid orange;
+      background-color:rgb(255, 206, 114);
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 5px;
+      border-radius: 10px;
+      margin-top: 10px;
+  }
+  .Modal{
+    object-fit: contain;
+    background-color: #fafafa;
+    height: auto;
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    padding: 5px;
+    transform: translate(-50%, -50%);
+  }
+  .Imageupload{
+      height: 50vh;
+      width: 40vh;
+  }
+  .Imageupload_progress{
+      margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+  }
+  
