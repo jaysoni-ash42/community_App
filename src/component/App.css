@@ -1,10 +1,10 @@
 * {
   margin: 0;
 }
-.app{
+.app {
   background-color: #fafafa;
 }
-.home{
+.home {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
