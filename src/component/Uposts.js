@@ -64,7 +64,7 @@ function Uposts({comment,like,img,post}) {
                     <ReactPlayer url={img} controls={true} loop={true}  playing={true} width="100%" />
                     }
                    <div className="post_image_details post_image_details-blurr" onClick={openUpload}>
-                   <h4 className="post_name_u"><strong>{post.toUpperCase()}</strong></h4>
+                   <h4 className="post_name_u"><strong>{"`"+post.toUpperCase()+"`"}</strong></h4>
                    <IconButton onClick={openUpload}><FavoriteBorder style={{color:"white"}}/> <h6 style={{fontFamily:"monospace",marginLeft:5,color:"white",fontSize:20}}>{Object.keys(like).length}</h6></IconButton>
                    <IconButton onClick={openUpload}><CommentOutlined style={{color:"white"}}/> <h6 style={{fontFamily:"monospace",marginLeft:5,color:"white",fontSize:20}}>{Object.keys(comment).length}</h6></IconButton>
                    </div>

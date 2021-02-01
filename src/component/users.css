@@ -53,6 +53,7 @@
   background-color: #fafafa;
   position: absolute;
   padding: 5px;
+  width: auto;
   border-radius: 10px;
   transition: transform 0.75s;
   transform: translate(-50%, -50%);
@@ -60,7 +61,7 @@
 }
 .Imageupload {
   height: 50vh;
-  width: 40vh;
+  width: 50vh;
 }
 .Imageupload_progress {
   margin-top: 10px;

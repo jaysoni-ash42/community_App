@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import { Searchpost, Searchuser } from "./userContext";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 import Post from "./post";
+import { SearchPost, SearchUser } from "../Context";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,9 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Search() {
+    const { searchuser, setValue } = useContext(SearchUser);
+    const { searchpost, setPost } = useContext(SearchPost);
+    React.useEffect(() => {
+        setValue(JSON.parse(window.localStorage.getItem("value")));
+        setPost(JSON.parse(window.localStorage.getItem("post")));
+    }, [])
     const classes = useStyles();
-    const { searchuser, setSearchuser } = useContext(Searchuser)
-    const { searchpost, setSearchpost } = useContext(Searchpost);
     return (
         <div className="search">
             {
@@ -31,7 +36,7 @@ function Search() {
             <div className="posts_view">
                 <Grid container spacing={1} className={classes.root}>
                     {
-                        searchpost.length > 0 ? searchpost.map(post => (
+                        searchpost != null ? searchpost.map(post => (
                             <Grid item xs={"auto"} className={classes.gridList} key={post._id} >
                                 <Post postid={post._id} img={post.img} username={post.username} post={post.post} comment={post.comments} userurl={post.userimg} like={post.like} key={post._id} />
                             </Grid>

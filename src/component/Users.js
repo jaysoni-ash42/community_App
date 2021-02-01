@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, storage } from "../firebaseConfig/firebase";
 import "./users.css";
 import Axios from "axios";
@@ -10,7 +10,8 @@ import { PostAdd } from "@material-ui/icons"
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
-import { userContext } from "./userContext";
+import { useStateValue } from "../StateProvider";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Users() {
-  const { user, setUser } = useContext(userContext);
+  const [{ user }, dispatch] = useStateValue();
   const classes = useStyles();
   const [post, setPost] = useState([]);
   const [openUpload, setUpload] = useState(false);
@@ -56,16 +57,6 @@ function Users() {
       })
     }
   }, [value, user])
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      }
-      else {
-        setUser(null);
-      }
-    })
-  }, [user]);
   const handleUpload = (e) => {
     e.preventDefault();
     console.log(Object.keys(caption).length + " " + Object.keys(image).length);
@@ -140,7 +131,7 @@ function Users() {
             <h1 style={{ textAlign: "center", fontFamily: "monospace", border: "1px solid lightgray", padding: 10 }}><strong>Upload a Post</strong></h1>
             <LinearProgress style={{ marginTop: 10 }} variant="determinate" value={progress} />
             <input type="text" className="Imageupload_progress" placeholder="Enter a caption...." onChange={(e) => setCaption(e.target.value)} />
-            <input type="file" className="Imageupload_progress" onChange={handleChange} />
+            <input type="file" className="Imageupload_progress" onChange={handleChange} accept="image/*,video/*,audio/*" />
             <div style={{ display: 'flex', justifyContent: 'space-evenly', padding: 10 }}><center><Button style={{ backgroundColor: "lightgray", margin: 10 }} onClick={handleUpload} >Upload</Button><Button style={{ backgroundColor: "lightgray", margin: 10 }} onClick={closeUpload} >close</Button></center></div>
             <p className="post"># POst a creative post to let the world Know about your work</p>
           </div>

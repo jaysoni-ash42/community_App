@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./post.css"
 import { auth } from "../firebaseConfig/firebase";
 import Avatar from "@material-ui/core/Avatar";
@@ -7,11 +7,12 @@ import IconButton from "@material-ui/core/IconButton";
 import { FavoriteBorder, CommentOutlined } from "@material-ui/icons";
 import Axios from "axios";
 import DeleteForever from "@material-ui/icons/DeleteForever";
-import { userContext } from "./userContext";
 import ReactPlayer from 'react-player';
+import { useStateValue } from "../StateProvider";
+
 
 function Post({ postid, img, username, comment, post, userurl, like }) {
-    const { user, setUser } = useContext(userContext);
+    const [{ user }, dispatch] = useStateValue();
     const [comments, setComment] = useState("");
     const [commentapi, setCommentapi] = useState([]);
     const [state, setState] = useState(false);

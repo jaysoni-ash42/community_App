@@ -9,7 +9,6 @@ function Home() {
   useEffect(() => {
     Axios.get("http://localhost:9000/post").then((res) => {
       setPost(res.data);
-      console.log(res.data);
     }).catch((err) => {
       alert(err.message);
     })

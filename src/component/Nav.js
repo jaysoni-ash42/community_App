@@ -4,7 +4,7 @@ import firebase from "firebase/app"
 import { auth } from "../firebaseConfig/firebase";
 import Button from '@material-ui/core/Button';
 import Avatar from "@material-ui/core/Avatar";
-import { ExitToAppSharp, AccountBox, HomeOutlined } from "@material-ui/icons"
+import { ExitToAppRounded, AccountBoxOutlined, HomeOutlined } from "@material-ui/icons"
 import { NavLink, Redirect } from "react-router-dom";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,12 +12,14 @@ import { Input } from '@material-ui/core';
 import IconButton from "@material-ui/core/IconButton";
 import Search from "@material-ui/icons/Search";
 import Axios from "axios";
-import { userContext, Searchpost, Searchuser } from "./userContext";
+import { useStateValue } from "../StateProvider";
+import { SearchPost, SearchUser } from "../Context";
+
 
 function Nav() {
-  const { user, setUser } = useContext(userContext);
-  const { searchuser, setSearchuser } = useContext(Searchuser)
-  const { searchpost, setSearchpost } = useContext(Searchpost);
+  const [{ user }, dispatchUser] = useStateValue();
+  const { searchuser, setValue } = useContext(SearchUser);
+  const { searchpost, setPost } = useContext(SearchPost);
   const [anchorEl, setAnchorEl] = useState();
   const [search, setSearch] = useState("");
   const [bool, setBool] = useState(false);
@@ -31,20 +33,20 @@ function Nav() {
     else {
       Axios.get("http://localhost:9000/search/" + search.toLowerCase()).then((response) => {
         if (response.status === 200 || 304) {
-          setSearchuser(JSON.parse(JSON.stringify(response.data.user)));
-          setSearchpost(JSON.parse(JSON.stringify(response.data.post)));
-          console.log(searchuser);
-          console.log(searchpost);
+          setValue(response.data.user);
+          setPost(response.data.post);
+          window.localStorage.setItem("value", JSON.stringify(response.data.user));
+          window.localStorage.setItem("post", JSON.stringify(response.data.post));
           setBool(true);
           setSearch("");
         }
         else {
-          alert("no such user");
+          alert("No user found named" + search);
           setSearch("");
         }
 
       }).catch((err) => {
-        alert("no such user");
+        alert(err.message);
         setSearch("");
       })
 
@@ -84,7 +86,10 @@ function Nav() {
         /** @type {firebase.auth.OAuthCredential} */
         var user = result.user;
         handleUpload(user);
-        setUser(user);
+        dispatchUser({
+          type: "setuser",
+          payload: user
+        })
       }).catch((error) => {
         alert(error.message);
       });
@@ -92,7 +97,10 @@ function Nav() {
   const Log_out = (e) => {
     e.preventDefault();
     auth.signOut();
-    setUser(null);
+    dispatchUser({
+      type: "logout",
+      payload: null
+    })
     setAnchorEl(null);
   }
   return (
@@ -103,7 +111,7 @@ function Nav() {
       </div>
       <div>
         <form className="searchbar" onSubmit={handleSearch} >
-          <Input type="text" placeholder="Search" disableUnderline={true} style={{ textAlign: "center", paddingTop: 5, paddingLeft: 5, width: '40vh' }} onChange={(e) => setSearch(e.target.value)} value={search} />
+          <Input type="text" placeholder="Search" disableUnderline={true} style={{ textAlign: "center", paddingTop: 5, paddingLeft: 5, width: '40vh' }} onChange={(e) => setSearch(e.target.value)} />
           <IconButton style={{ padding: 0 }}><Search /></IconButton>
           {
             bool ? <Redirect style={{ textDecoration: 'none', color: 'black' }} to={`/search/${search}`} /> : null
@@ -117,6 +125,7 @@ function Nav() {
           <Menu
             style={{ padding: 10 }}
             id="simple-menu"
+            variant="selectedMenu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
@@ -126,9 +135,9 @@ function Nav() {
               <MenuItem onClick={handleClose} style={{ margin: 10 }}><HomeOutlined style={{ padding: 0, marginRight: 5, color: "gray" }} />Home</MenuItem>
             </NavLink>
             <NavLink style={{ textDecoration: 'none', color: 'black' }} to={"/user/" + user.email} >
-              <MenuItem onClick={handleClose} style={{ margin: 10 }}><AccountBox style={{ padding: 0, marginRight: 5, color: "gray" }} />Profile</MenuItem>
+              <MenuItem onClick={handleClose} style={{ margin: 10 }}><AccountBoxOutlined style={{ padding: 0, marginRight: 5, color: "gray" }} />Profile</MenuItem>
             </NavLink>
-            <MenuItem onClick={Log_out} style={{ margin: 10 }}><ExitToAppSharp style={{ padding: 0, marginRight: 5, color: "gray" }} />Log out</MenuItem>
+            <MenuItem onClick={Log_out} style={{ margin: 10 }}><ExitToAppRounded style={{ padding: 0, marginRight: 5, color: "gray" }} />Log out</MenuItem>
           </Menu>
         </div>
           : <div className="login_signup_button">
