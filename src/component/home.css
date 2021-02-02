@@ -1,6 +1,20 @@
-.home{
-    margin: 0;
-    width:auto;
-    height:auto;
-    background-color: white;
+.home {
+  margin: 0;
+  width: auto;
+  height: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.homepost {
+  margin: 0;
+  width: auto;
+  height: auto;
+  background-color: white;
+}
+.covidcases {
+  position: fixed;
+  right: 10px;
+  top: 75px;
 }
